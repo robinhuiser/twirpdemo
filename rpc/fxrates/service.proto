@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package rdclda.twirpdemo.fxrates;
+option go_package = "github.com/robinhuiser/twirpdemo/rpc/fxrates";
+
+// FXRates service returns an exchange rate for a foreign currency
+service FXRates {
+  // FXRates produces an exchange rate!
+  rpc FXRates(Currency) returns (Rate);
+}
+
+// Currency specified by its official ISO-4217 code.
+message Currency {
+  string code = 1; // must be in [USD, INR, AED)
+}
+
+// A rate is a provided against the EUR.
+message Rate {
+  int32 rate = 1;
+  string name = 2; // i.e. "US Dollar"
+}
